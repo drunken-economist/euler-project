@@ -1,15 +1,19 @@
 
 
 def palindrome():
-	num1 = 100
-	while num1 <= 999:
-		num2 = 100
-		while num2 <= 999:
+	num1 = 999
+	lowerLimitNum = 100
+	largestPalindrome = 0
+	while num1 >= lowerLimitNum:
+		num2 = 999
+		while num2 >= lowerLimitNum:
 			numToCheck = num1 * num2
-			if numToCheck < 100000:
-				if numToCheck % 10000 == numToCheck and numToCheck % 1000 == numToCheck % 10:
+			print num1 , " * " , num2 , " = " , numToCheck
+			if str(numToCheck) == str(numToCheck)[::-1]: #convert to string, check if the inversion matches
+				if numToCheck > largestPalindrome:
 					largestPalindrome = numToCheck
-			elif numToCheck % 100000 == numToCheck and numToCheck % 10000 == numToCheck % 10 and numToCheck % 1000 == numToCheck % 100:
-				largestPalindrome = numToCheck
+				#lowerLimitNum = num2 #we found a palindrome at this factor, so we don't need to checl lower than it anymore
+			num2 -= 1
+		num1 -= 1
 	return largestPalindrome
 print palindrome()
