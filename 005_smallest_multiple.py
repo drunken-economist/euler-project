@@ -2,16 +2,13 @@
 # What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 
 def smallest_no_rem(limitNum):
-	testNum = limitNum
-	while testNum > 0:
-		if divisible_by_all(testNum, limitNum):
-			return testNum
-		testNum += limitNum #it has to be multiple of limitNum, obvy
-
-def divisible_by_all(testNum, limitNum): #determines if the testNum is divisible by all ints between 2 and the limitNum
-	for i in range(2,limitNum):
-		if testNum % i != 0:
-			return False
-	return True
+	numToTest = limitNum #has to be larger than our limit
+	for i in (range(2, limitNum)):
+		if numToTest % i > 0:
+			for j in range(2, limitNum):
+				if (numToTest*j) % i == 0:
+					numToTest *= j #iterate by the next number which mods to 0
+					break
+	return numToTest
 
 print smallest_no_rem(20)
